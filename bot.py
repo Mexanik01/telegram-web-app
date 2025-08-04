@@ -9,6 +9,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
+
+
 async def init_db():
     async with aiosqlite.connect("database.db") as db:
         await db.execute("""
@@ -112,6 +114,27 @@ def get_staff_keyboard(prefix=""):
     for name in data.keys():
         kb.insert(InlineKeyboardButton(name, callback_data=f"{prefix}{name}"))
     return kb
+
+
+@dp.message_handler(content_types=types.ContentTypes.WEB_APP_DATA)
+async def handle_web_app_data(message: types.Message):
+    try:
+        data = json.loads(message.web_app_data.data)
+        count = data.get("photoCount")
+        if count is None or not isinstance(count, int) or count < 0:
+            await message.answer("Получено некорректное количество фото.")
+            return
+
+        # Пример: просто ответим, можно тут добавить логику записи
+        await message.answer(f"Вы отправили количество фото: {count}")
+
+        # Если нужно — добавляй логику, как в твоём коде:
+        # Например, запомнить кто отправил (message.from_user.id)
+        # Или сохранить в базу/файл, как в process_photo_count
+
+    except Exception as e:
+        await message.answer("Ошибка при обработке данных из WebApp.")
+
 
 # Команда /start
 @dp.message_handler(commands=['start'])

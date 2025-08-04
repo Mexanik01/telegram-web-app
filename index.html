@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Добавить фото сотрудника</title>
+</head>
+<body>
+  <h2>Добавить фото сотруднику</h2>
+  
+  <label>Количество фото:</label>
+  <input type="number" id="photoCount" min="0" />
+  <br /><br />
+  
+  <button id="sendBtn">Отправить в бот</button>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    
+    // Можно раскрыть WebApp, чтобы было удобно
+    tg.expand();
+
+    document.getElementById('sendBtn').onclick = () => {
+      const count = parseInt(document.getElementById('photoCount').value);
+      if (isNaN(count) || count < 0) {
+        alert("Введите корректное количество фото");
+        return;
+      }
+
+      // Отправляем данные в бота через sendData
+      tg.sendData(JSON.stringify({ photoCount: count }));
+    };
+  </script>
+</body>
+</html>
