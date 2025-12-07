@@ -4,6 +4,4 @@ async-timeout==4.0.3
 yarl==1.21.0
 multidict==6.0.4
 typing-extensions==4.7.1
-pydantic==1.10.12
-
-
+pydantic>=2.4.1,<2.13
