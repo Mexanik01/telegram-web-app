@@ -11,11 +11,11 @@ import uuid
 # FFMPEG
 os.environ["PATH"] += os.pathsep + r"C:\ffmpeg-master-latest-win64-gpl-shared\bin"
 
-BOT_TOKEN = "8263040505:AAFv7AhRTGi-dz-KPYEmQy25HrU1pE8NtSI"
+BOT_TOKEN = os.getenv("TOKEN")
+
 DOWNLOAD_DIR = "downloads"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
-NGROK_URL = "https://sleekiest-fissiparously-candi.ngrok-free.dev"
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
@@ -257,3 +257,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
