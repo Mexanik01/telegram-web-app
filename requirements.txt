@@ -1,7 +1,4 @@
-aiogram==3.23.0
-
+aiogram==3.0.0b7
 yt-dlp
 moviepy
-aiohttp==3.8.6
-python-dotenv
-
+aiohttp
